@@ -147,11 +147,7 @@ Run 'python %(prog)s <subcommand> --help' for subcommand help.''',
     sc.local.do_not_copy_source_files = True
     sc.run_dir_root = kwargs.pop('result_dir')
     sc.run_desc = subcmd
-
-    func_name_map = {
-        'generate-images': 'run_generator.generate_images',
-        'style-mixing-example': 'run_generator.style_mixing_example'
-    }
+    run_generator.generate_images
     dnnlib.submit_run(sc, func_name_map[subcmd], **kwargs)
 
 #----------------------------------------------------------------------------
