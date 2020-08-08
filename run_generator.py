@@ -37,15 +37,6 @@ def generate_images(network_pkl, seeds, truncation_psi):
 
 #----------------------------------------------------------------------------
 
-def style_mixing_example(network_pkl, row_seeds, col_seeds, truncation_psi, col_styles, minibatch_size=4):
-    print('Loading networks from "%s"...' % network_pkl)
-    _G, _D, Gs = pretrained_networks.load_networks(network_pkl)
-    w_avg = Gs.get_var('dlatent_avg') # [component]
-
-    Gs_syn_kwargs = dnnlib.EasyDict()
-    Gs_syn_kwargs.output_transform = dict(func=tflib.convert_images_to_uint8, nchw_to_nhwc=True)
-
-
 #----------------------------------------------------------------------------
 
 def _parse_num_range(s):
