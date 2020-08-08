@@ -77,14 +77,6 @@ Run 'python %(prog)s <subcommand> --help' for subcommand help.''',
         formatter_class=argparse.RawDescriptionHelpFormatter
     )
 
-    subparsers = parser.add_subparsers(help='Sub-commands', dest='command')
-
-    parser_generate_images = subparsers.add_parser('generate-images', help='Generate images')
-    parser_generate_images.add_argument('--network', help='Network pickle filename', dest='network_pkl', required=True)
-    parser_generate_images.add_argument('--seeds', type=_parse_num_range, help='List of random seeds', required=True)
-    parser_generate_images.add_argument('--truncation-psi', type=float, help='Truncation psi (default: %(default)s)', default=0.5)
-    parser_generate_images.add_argument('--result-dir', help='Root directory for run results (default: %(default)s)', default='results', metavar='DIR')
-
     args = parser.parse_args()
     kwargs = vars(args)
     subcmd = kwargs.pop('command')
@@ -99,7 +91,7 @@ Run 'python %(prog)s <subcommand> --help' for subcommand help.''',
     sc.local.do_not_copy_source_files = True
     sc.run_dir_root = kwargs.pop('result_dir')
     sc.run_desc = subcmd
-    run_generator.generate_images
+    generate_images()
     dnnlib.submit_run(sc, func_name_map[subcmd], **kwargs)
 
 #----------------------------------------------------------------------------
